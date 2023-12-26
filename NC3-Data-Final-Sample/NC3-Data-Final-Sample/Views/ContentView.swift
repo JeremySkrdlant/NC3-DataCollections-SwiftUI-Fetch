@@ -10,12 +10,17 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible(minimum: 120)), GridItem(.flexible(minimum: 120))], content: {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], content: {
                     ForEach (activities){
                         activity in
-                        ActivityPreviewCard(activity: activity)
+                        NavigationLink {
+                            ActivityDetailView(activity: activity)
+                        } label: {
+                            ActivityPreviewCard(activity: activity)
+                        }
                     }
                 })
+
                 .toolbar(content: {
                     NavigationLink {
                         AddActivityView{
@@ -26,7 +31,6 @@ struct ContentView: View {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 30))
                     }
-
                 })
                 .padding()
                 .onAppear{
@@ -34,10 +38,9 @@ struct ContentView: View {
                         activities = try await getAllActivities()
                         print(activities)
                     }
-            }
+                }
             }
         }
-        
     }
 }
 

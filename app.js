@@ -8,7 +8,9 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 // This resets all the data once you restart the server. 
-let activities = []
+let activities = [
+    new Activity('Classroom Activity Idea Board', 180, 'Using SwiftUI to Fetch Data from a server', ['Collection Views', 'WWW Requestes', 'SwiftUI Components'], ['Mentimeter','Xcode', 'Postman', 'Server Running the Backend'], 'https://www.nwktc.edu/assets/images/staff/2018_Jeremy_Skrdlant_1.jpg'),
+]
 
 /** 
  * GET endpoint to get all the activities.
@@ -34,6 +36,7 @@ app.get('/', (request, response) => {
  * @param {string} request.body.description - The description of the activity.
  * @param {array} request.body.competencies - The competencies involved in the activity.
  * @param {array} request.body.toolsNeeded - The tools needed for the activity.
+ * @param {string} request.body.imageURL - The URL of the image associated with the activity.
  * @param {object} response - The response object to send back the response.
  * 
  * @return {void} Returns nothing. Sends a response to the client.
@@ -56,8 +59,11 @@ app.post('/addActivity', (request, response) => {
     if(!request.body.toolsNeeded) {
         return response.status(400).send('Tools Needed is required. You can pass an empty array.')
     }
+    if(!request.body.imageURL) {
+        return response.status(400).send('Image URL is required')
+    }
 
-    const activity = new Activity(request.body.title, request.body.timeToComplete, request.body.description, request.body.competencies, request.body.toolsNeeded)
+    const activity = new Activity(request.body.title, request.body.timeToComplete, request.body.description, request.body.competencies, request.body.toolsNeeded, request.body.imageURL)
     activities.push(activity)
     response.send(activities)
 })

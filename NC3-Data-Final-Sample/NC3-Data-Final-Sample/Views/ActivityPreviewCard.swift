@@ -25,6 +25,7 @@ struct ActivityPreviewCard: View {
             }
             Text(activity.title)
                 .bold()
+                .foregroundStyle(Color.black)
             Spacer()
         }
         .frame(width: 120, height: 200)

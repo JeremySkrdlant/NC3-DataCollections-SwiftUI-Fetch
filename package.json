@@ -7,7 +7,7 @@
   "scripts": {
     "start-production": "node app.js",
     "start-dev": "node --watch app.js",
-    "run-docker": "docker compose up --build"
+    "docker": "docker compose up --build"
   },
   "keywords": [],
   "author": "",
