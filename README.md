@@ -2,6 +2,8 @@
 
 You can use docker or just run the node server on your local computer. 
 
+This does require nodejs on your machine. https://nodejs.org/en
+
 ## Install modules 
 Run the following command to install your node modules.  
 ```
